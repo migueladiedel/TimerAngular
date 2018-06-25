@@ -1,0 +1,56 @@
+<div class='container text-center'>
+  <img src='assets/img/reloj.png' alt='Reloj'/>
+  <div class='container'>
+  <h3>
+      {{ queuedTareas | i18nPlural: queueHeaderMapping }} para hoy
+      <span class="small" *ngIf="queuedTareas > 0">(Tiempo estimado:
+        {{ queuedTareas * 25 }})</span>
+  </h3>
+  <h4>Cartera de Tareas</h4>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>ID Tarea</th>
+          <th>Nombre Tarea</th>
+          <th>Completada Para</th>
+          <th>Ciclos</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+         <tr *ngFor='let task of VM.Listado; let i = index'>
+          <td>{{task.id}}
+          </td>
+          <td>{{task.name | slice: 0:35 }}
+            <span [hidden]='task.name.length < 35'>...</span>
+          </td>
+          <td>{{task.deadline | date: 'fullDate' }}
+              <span *ngIf="task.deadline < today" class="badge badge-danger">
+                Atrasado
+              </span>
+          </td>
+          <td class='text-center'>{{task.tareasRequeridas}}</td>
+          <td>
+             <button
+             type='button'
+             class='btn btn-success btn-xs'
+             (click)='toggleTask(task.id)'>
+                <i class="fa fa-plus-circle">
+                  Añadir
+                </i>
+             </button>
+             <button
+              type='button'
+              class='btn btn-danger btn-xs'
+              (click)='toggleTask(task.id)'
+              >
+              <i class="fa fa-minus-circle">
+                Quitar
+              </i>
+             </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
