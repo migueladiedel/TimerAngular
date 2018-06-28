@@ -19,31 +19,30 @@
       </thead>
       <tbody>
          <tr *ngFor='let task of VM.Listado; let i = index'>
-          <td>{{task.id}}
-          </td>
+          <th>{{task.id}}</th>
           <td>{{task.name | slice: 0:35 }}
             <span [hidden]='task.name.length < 35'>...</span>
           </td>
           <td>{{task.deadline | date: 'fullDate' }}
+              <br/>
               <span *ngIf="task.deadline < today" class="badge badge-danger">
                 Atrasado
               </span>
           </td>
           <td class='text-center'>{{task.tareasRequeridas}}</td>
           <td>
-             <button
+             <button *ngIf="task.tareasRequeridas < 1"
              type='button'
              class='btn btn-success btn-xs'
-             (click)='toggleTask(task.id)'>
+             (click)='aum(task.id)'>
                 <i class="fa fa-plus-circle">
                   Añadir
                 </i>
              </button>
-             <button
+             <button *ngIf="task.tareasRequeridas > 0"
               type='button'
               class='btn btn-danger btn-xs'
-              (click)='toggleTask(task.id)'
-              >
+              (click)='dism(task.id)'>
               <i class="fa fa-minus-circle">
                 Quitar
               </i>

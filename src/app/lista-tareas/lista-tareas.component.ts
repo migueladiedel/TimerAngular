@@ -19,18 +19,17 @@ export class TasksComponent implements OnInit {
     'other': '# tareas'
   };
   today: Date;
-  tasks: Task[] = [];
+  tasks: any = [];
   constructor(private taskService: TaskService) {
     this.today = new Date();
   }
   public get VM() { return this.taskService; }
   ngOnInit() {
-    this.taskService.list();
+    this.listTasks();
     this.today = new Date();
   }
   toggleTask(taskId: number): void {
-    console.log(this.tasks[ taskId ]);
-    this.tasks[ taskId ].queued = !this.tasks[ taskId ].queued;
+    this.taskService.setQueued(taskId);
   }
   private actualizarTareasEnCola(): void {
     this.queuedTareas = this.tasks
@@ -38,5 +37,19 @@ export class TasksComponent implements OnInit {
       .reduce((tareas: number, queuedTask: Task) => {
       return tareas + queuedTask.tareasRequeridas;
     }, 0);
+  }
+
+  aum(taskId: number): void {
+    this.taskService.aumeTareasRequeridas(taskId);
+  }
+  dism(taskId: number): void {
+    this.taskService.disminTareasRequeridas(taskId);
+  }
+
+  private listTasks() {
+    // Cargamos el array
+    this.taskService.list();
+    // Recogemos datos del array
+    this.tasks = this.VM;
   }
 }
