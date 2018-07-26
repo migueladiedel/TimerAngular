@@ -30,23 +30,24 @@
               </span>
           </td>
           <td class='text-center'>{{task.tareasRequeridas}}</td>
-          <td>
-             <button *ngIf="task.tareasRequeridas < 1"
+          <td [ngSwitch]="task.id">
+            <button *ngSwitchCase=1
              type='button'
-             class='btn btn-success btn-xs'
-             (click)='aum(task.id)'>
-                <i class="fa fa-plus-circle">
-                  Añadir
-                </i>
-             </button>
-             <button *ngIf="task.tareasRequeridas > 0"
-              type='button'
-              class='btn btn-danger btn-xs'
-              (click)='dism(task.id)'>
-              <i class="fa fa-minus-circle">
-                Quitar
-              </i>
-             </button>
+             class='btn btn-danger btn-xs'
+             (click)='dism(task.id)'>
+             <i class="fa fa-minus-circle">
+               Quitar
+             </i>
+            </button>
+            <button *ngSwitchDefault 
+            type='button'
+            class='btn btn-success btn-xs'
+            (click)='aum(task.id)'>
+               <i class="fa fa-plus-circle">
+                 Añadir
+               </i>
+            </button>
+            
           </td>
         </tr>
       </tbody>
