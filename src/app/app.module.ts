@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { AdvancedComponent, Timer2Component } from './advanced/advanced.component';
 import { TasksComponent } from './lista-tareas/lista-tareas.component';
 import { TaskService } from './lista-tareas/lista-tareas-vm.service';
+import { FormatMinToHour } from './global/pipes/formatMinToHour';
+import { TareaTasksIconsComponent } from './tarea-tasks-icons/tarea-tasks-icons.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { TaskService } from './lista-tareas/lista-tareas-vm.service';
     TimerComponent,
     MenuComponent,
     HomeComponent,
-    AdvancedComponent, Timer2Component, TasksComponent
+    AdvancedComponent, Timer2Component, TasksComponent,
+    FormatMinToHour,
+    TareaTasksIconsComponent
   ],
   imports: [
     BrowserModule,

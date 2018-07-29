@@ -2,7 +2,7 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { Task } from './Task';
+import { Task } from '../Models/Task';
 import { TaskService } from './lista-tareas-vm.service';
 
 @Component({
@@ -19,37 +19,46 @@ export class TasksComponent implements OnInit {
     'other': '# tareas'
   };
   today: Date;
-  tasks: any = [];
+  tasks: Task[] = [];
   constructor(private taskService: TaskService) {
-    this.today = new Date();
+    
   }
   public get VM() { return this.taskService; }
   ngOnInit() {
-    this.listTasks();
+    // Cargamos el array
+    this.taskService.list();
+    // Recogemos datos del array
+    this.tasks = this.VM.Listado;
     this.today = new Date();
+    this.actualizarTareasEnCola();
   }
   toggleTask(taskId: number): void {
-    this.taskService.setQueued(taskId);
+    this.tasks[taskId].queued = !this.tasks[taskId].queued;
+    this.actualizarTareasEnCola();
   }
   private actualizarTareasEnCola(): void {
     this.queuedTareas = this.tasks
       .filter((task: Task) => task.queued)
       .reduce((tareas: number, queuedTask: Task) => {
       return tareas + queuedTask.tareasRequeridas;
-    }, 0);
+    }, 0);    
   }
 
-  aum(taskId: number): void {
+  eventMouseOver(task){
+    console.log(task.name);
+  }
+  eventMouseOut(task){
+    console.log('Ratón encima para detalles');
+  }
+ 
+
+  /* aum(taskId: number): void {
     this.taskService.aumeTareasRequeridas(taskId);
   }
   dism(taskId: number): void {
     this.taskService.disminTareasRequeridas(taskId);
-  }
+  } */
 
-  private listTasks() {
-    // Cargamos el array
-    this.taskService.list();
-    // Recogemos datos del array
-    this.tasks = this.VM;
-  }
+  
+  
 }

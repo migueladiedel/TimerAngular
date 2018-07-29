@@ -1,11 +1,20 @@
 <div class='container text-center'>
-  <img src='assets/img/reloj.png' alt='Reloj'/>
-  <div class='container'>
+  <img src="assets/img/reloj.png" alt="Reloj"/>
+  <div class="container">
   <h3>
-      {{ queuedTareas | i18nPlural: queueHeaderMapping }} para hoy
-      <span class="small" *ngIf="queuedTareas > 0">(Tiempo estimado:
-        {{ queuedTareas * 25 }})</span>
+    {{ queuedTareas | i18nPlural: queueHeaderMapping }} para hoy
+    <span class="small" *ngIf="queuedTareas > 0">(Tiempo estimado:
+      {{ queuedTareas * 25 | formatMinToHour}})</span>
   </h3>
+  <p>
+    <span *ngFor='let task of VM.Listado; let i = index'>
+      <tarea-tasks-icons 
+        [task]="task" [size]='50' [numTareas]='queuedTareas'
+        (mouseover)="eventMouseOver(task)"
+        (mouseout)="eventMouseOut(task)">
+      </tarea-tasks-icons>
+    </span>
+  </p>
   <h4>Cartera de Tareas</h4>
     <table class='table'>
       <thead>
@@ -19,7 +28,11 @@
       </thead>
       <tbody>
          <tr *ngFor='let task of VM.Listado; let i = index'>
-          <th>{{task.id}}</th>
+          <th scope="row">{{task.id}}
+            <span *ngIf="task.queued" class="badge badge-info">
+              En Cola
+            </span>
+          </th>
           <td>{{task.name | slice: 0:35 }}
             <span [hidden]='task.name.length < 35'>...</span>
           </td>
@@ -30,11 +43,19 @@
               </span>
           </td>
           <td class='text-center'>{{task.tareasRequeridas}}</td>
-          <td [ngSwitch]="task.id">
-            <button *ngSwitchCase=1
+          <td [ngSwitch]="task.queued">
+            <button *ngSwitchCase="false"
+            type='button'
+            class='btn btn-success btn-xs'
+            (click)='toggleTask(task.id)'>
+               <i class="fa fa-plus-circle">
+                 Añadir
+               </i>
+            </button>
+            <button *ngSwitchCase="true"
              type='button'
              class='btn btn-danger btn-xs'
-             (click)='dism(task.id)'>
+             (click)='toggleTask(task.id)'>
              <i class="fa fa-minus-circle">
                Quitar
              </i>
@@ -42,12 +63,11 @@
             <button *ngSwitchDefault 
             type='button'
             class='btn btn-success btn-xs'
-            (click)='aum(task.id)'>
+            (click)='toggleTask(task.id)'>
                <i class="fa fa-plus-circle">
                  Añadir
                </i>
             </button>
-            
           </td>
         </tr>
       </tbody>
