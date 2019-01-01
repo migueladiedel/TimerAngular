@@ -1,27 +1,43 @@
-# Proyect
+# Curso Angular 5
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+Curso de Angular 2 de Jesus Conde: transformando el código fuente en Angular 5 
 
-## Development server
+https://www.youtube.com/playlist?list=PLEtcGQaT56ch63VgSUCOle6QNBqK8ewvd
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Inicio
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Titulo del curso Angular 5
+
+## Basic
+
+Contador hacia atrás de 25 min, realizado sólo con el evento del botón y actualizando la cadena manualmente
+
+## Advanced
+
+Contador hacia atrás de 15 sec, con 3 botones restablecer, pausar y reanudar
+
+Evento de cuando se acabe la cuenta atrás aparezca un alert con un mensaje
+
+## Lista de Tareas
+
+Uso de directivas ngFor, ngIf, ngSwitch
+Uso de eventos click, mouseover, mouseout.
+Uso de pipes personalizados y de Angular como i18nPlural, slice, date, etc.
+Uso de componentes hijos con parametros de entrada @Input
+
+Tabla con datos recogidos de un servicio si el atributo queued es true se pone un boton con el texto añadir sino pone quitar
+En la cabecera calcula el tiempo estimado para las tareas pendientes siendo 25 min por cada ciclo de cada tarea.
+Cada reloj pequeño representa a cada uno de los elementos de la tabla y si pasas el cursos por ella te muestra debajo el atributo name del elemento seleccionado.
+
+
+## Lanzar aplicacion
+
+ng serve -o
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+ng build
+Use the `-prod` flag for a production build.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
